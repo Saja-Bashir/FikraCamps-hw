@@ -19,15 +19,20 @@ console.log(BestProfit([150, 146, 142, 143, 145, 144]));
  * example CheckOverlap("13/5/2021 13:00","14/5/2021 13:00", "14/5/2021 13:00","16/5/2021 13:00" ) => overlap
  */
 
-function CheckOverlap(t1Start, t1End, t2Start, t2End) {}
-console.log(
-  CheckOverlap(
+function CheckOverlap(t1Start, t1End, t2Start, t2End) {
+    
+    if((t1Start <= t2End) && (t2Start <= t1End)){
+        return("overlap")
+    } else {
+        return("no overlap")
+    }
+}
+console.log(CheckOverlap(
     "13/5/2021 13:00",
     "14/5/2021 13:00",
-    "14/5/2021 13:00",
+    "15/5/2021 13:00",
     "16/5/2021 13:00"
-  )
-);
+  ));
 
 /** Q3
  * assume you have a shoes factory and the production lines produces shoes as follows
@@ -40,16 +45,43 @@ console.log(
  * example HowManyPairs("RRLLRRRLLR") => 2
  */
 
-function HowManyPairs(shoes) {}
-console.log(HowManyPairs("RLRLRRLL"));
+function HowManyPairs(shoes) {
+  let count1=0,count2=0;
+
+    for(let i=0 ; i< shoes.length ; i++ ){
+      if(shoes[i]=='R')
+      {
+        count1++;
+      }else if(shoes[i]=='L')
+      {
+        count2++;
+      }
+     }
+     if(count1 <= count2){
+       return (count1 + " Pairs Of Shose")
+     }else if(count2 <= count1){
+      return(count2 + " Pairs Of Shose")
+     }
+}
+console.log(HowManyPairs("RLRRLRRLRLRRLLLLRR"));
 
 /** Q4
  *    Write a function that takes a string and return JSON of all the letters and its count. check the example to know more
  *    letterCount('abcac') => {a: 2, b: 1, c: 2}
  */
 
-function HowManyLetters(word) {}
-console.log(HowManyLetters("kkssffoos"));
+function HowManyLetters(word) {
+  let arryOfJson={};
+  for(let i=0 ;i<=word.length-1;i++){
+    if(arryOfJson[word[i]]){
+      arryOfJson[word[i]] = arryOfJson[word[i]]+1;
+    }else{
+      arryOfJson[word[i]]=1;
+    }
+  }
+  console.log("How Many Letters : ", arryOfJson)
+}
+HowManyLetters("kffooskssss")
 
 
 /** Q5
@@ -67,6 +99,21 @@ console.log(HowManyLetters("kkssffoos"));
  The arrays won't contain duplicate numbers.
  This is a challenge to enhance your ability, using the sort built-in won't enhance your skills.
   */
+function sortArray(array){
+  let temp=0;
+  for(let i=0 ; i<array.length -1  ; i++){
+    for(let j=i+1 ; j<array.length ; j++){
+      if(array[i] > array[j]){
+        temp=array[i];
+        array[i]=array[j];
+        array[j]=temp;
+      }
+    }
+  }
+  return("Array after sorting : " + array);
+}
+//sortArray([2, -5, 1, 4, 7, 8])
+console.log(sortArray([23, 15, 34, 17, -28]));
 
 /** Q6
   * Create a function that takes an array of numbers and return both the minimum and maximum numbers, in that order.
@@ -78,6 +125,24 @@ console.log(HowManyLetters("kkssffoos"));
  
  minMax([1]) ➞ [1, 1]
   */
+function minMax(arr){
+ let max=arr[0] ;
+  for(let j=0 ; j<arr.length;j++){
+    if(arr[j]>max){
+      max=arr[j];
+    }
+  }
+  let min=arr[0] ;
+  for(let i=0 ; i<arr.length;i++){
+    if(arr[i]<min){
+      min=arr[i];
+    }
+  }
+   /*let min = Math.min(...arr);
+   let max = Math.max(...arr);*/
+   console.log("Min Max : " , [min , max])
+}
+minMax([1, 2, 3, 4, 5]);
 
 /** Q7
   * Create a function that takes an array of numbers between 1 and 10 (excluding one number) and returns the missing number.
@@ -92,6 +157,15 @@ console.log(HowManyLetters("kkssffoos"));
  The array of numbers will be unsorted (not in order).
  Only one number will be missing.
   */
+function missingNum(arrayOfNum){
+  let count =10;
+  for(let i = 1; i <= count; i++){
+      if(arrayOfNum.indexOf(i) == -1){
+        console.log("The missing number is : ",i);
+      }
+    }
+}
+missingNum([ 7, 1, 8, 9, 4, 2, 3])
 
 /** Q8
   * Write a function that accepts a positive integer between 0 and 999 inclusive and returns a string representation of that integer written in English.
